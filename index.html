@@ -4,42 +4,55 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <title>Card</title>
-    <link href="index.css" rel="stylesheet">
-    <script defer src="fall.js"></script>
 </head>
+<style>
+    body{
+        margin: 0;
+        height: 100vh;
+        background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+        justify-content: center;
+        align-items: center;
+        display: flex;
+    }
+    .snowflakes{
+        position: absolute;
+        top: 0;
+        left: 0;
+        pointer-events: none;
+        width: 100%;
+        height: 100%;
+        z-index: 1;
+    }
+    .snowflake{
+        position: absolute;
+        top: -10px;
+        font-size: 16px;
+        color: white;
+        animation: fall 10s linear infinite;
+    }
+    @keyframes fall {
+        0% {transform: translateY(-100px)}
+        100% {transform: translateY(95vh)}
+
+    }
+</style>
 <body>
-<div class="task-card">
-    <div class="snowflakes">
-        <div class="snowflake">❄</div>
-    </div>
-    <div class="task-header">
-        Grocery shopping
-    </div>
-    <div class="task-content">
-        <div class="task-row">
-            <span>Description: </span>
-            Buy vegetables, fruits, and snacks
-        </div>
-        <div class="task-row">
-            <span>Status: </span>
-            <span class="status">In Progress</span>
-        </div>
-        <div class="task-row">
-            <span>Priority: </span>
-            <span class="priority">High</span>
-        </div>
-        <div class="task-row">
-            <span>Created on: </span>
-            2025-01-05
-        </div>
-        <div class="task-row">
-            <span>Due Date: </span>
-            2025-01-06
-        </div>
-    </div>
-    <div class="task-footer">
-        <button class="edit-button">Edit</button>
-    </div>
+<div class="snowflakes">
+    <div class="snowflake">❄</div>
 </div>
+<script>
+    function createSnowflake(){
+        const snowflake = document.createElement("div");
+        snowflake.className = 'snowflake';
+        snowflake.textContent = '❄';
+        snowflake.style.left = Math.random() * 100 + 'vw' // горизонтальное положение от 0vw to 100vw
+        snowflake.style.animationDuration = Math.random() * 3 + 7 + 's' // продолжительность анимации падения от 7 до 10с
+        snowflake.style.fontSize = Math.random() * 10 + 10 + 'px' // размер снежинки от 10 до 20px
+        document.querySelector('.snowflakes').appendChild(snowflake);
+        setTimeout(() => snowflake.remove(), 10000) // удаляем снежинку через 10 секунд
+
+    }
+    setInterval(createSnowflake, 300)
+</script>
 </body>
 </html>
